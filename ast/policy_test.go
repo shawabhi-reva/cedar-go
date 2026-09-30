@@ -72,3 +72,45 @@ func TestPolicy_MarshalCedar(t *testing.T) {
 		testutil.Error(t, err)
 	})
 }
+
+func TestPolicy_Conditional(t *testing.T) {
+	t.Parallel()
+
+	t.Run("builder marshals to cedar and back", func(t *testing.T) {
+		p := ast.Annotation("obligation", "mfa").Conditional().PrincipalEq(types.NewEntityUID("User", "alice"))
+		expected := `@obligation("mfa")
+conditional (
+    principal == User::"alice",
+    action,
+    resource
+);`
+		testutil.Equals(t, string(p.MarshalCedar()), expected)
+
+		var unmarshaled ast.Policy
+		err := unmarshaled.UnmarshalCedar([]byte(expected))
+		p.Position = internalast.Position{Offset: 0, Line: 1, Column: 1}
+		testutil.OK(t, err)
+		testutil.Equals(t, &unmarshaled, p)
+	})
+
+	t.Run("json effect is conditional", func(t *testing.T) {
+		p := ast.Conditional()
+		expected := `{
+		"effect": "conditional",
+		"principal": {
+			"op": "All"
+		},
+		"action": {
+			"op": "All"
+		},
+		"resource": {
+			"op": "All"
+		}
+	}`
+		testutil.JSONMarshalsTo(t, p, expected)
+
+		var unmarshaled ast.Policy
+		testutil.OK(t, unmarshaled.UnmarshalJSON([]byte(expected)))
+		testutil.Equals(t, &unmarshaled, p)
+	})
+}

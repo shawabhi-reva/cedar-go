@@ -39,6 +39,34 @@ func TestJSONDecision(t *testing.T) {
 		testutil.OK(t, err)
 		testutil.Equals(t, d, Deny)
 	})
+	t.Run("MarshalConditionalAllow", func(t *testing.T) {
+		t.Parallel()
+		d := ConditionalAllow
+		b, err := d.MarshalJSON()
+		testutil.OK(t, err)
+		testutil.Equals(t, string(b), `"conditionalAllow"`)
+	})
+	t.Run("UnmarshalConditionalAllow", func(t *testing.T) {
+		t.Parallel()
+		var d Decision
+		err := json.Unmarshal([]byte(`"conditionalAllow"`), &d)
+		testutil.OK(t, err)
+		testutil.Equals(t, d, ConditionalAllow)
+	})
+	t.Run("ZeroValueIsDeny", func(t *testing.T) {
+		t.Parallel()
+		var d Decision
+		testutil.Equals(t, d, Deny)
+	})
+}
+
+func TestEffectString(t *testing.T) {
+	t.Parallel()
+	testutil.Equals(t, Permit.String(), "permit")
+	testutil.Equals(t, Forbid.String(), "forbid")
+	testutil.Equals(t, Conditional.String(), "conditional")
+	var zero Effect
+	testutil.Equals(t, zero, Forbid)
 }
 
 func TestRequestEqual(t *testing.T) {

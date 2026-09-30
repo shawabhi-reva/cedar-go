@@ -20,11 +20,13 @@ type ConditionType struct {
 	Body      IsNode
 }
 
-type Effect bool
+type Effect uint8
 
+// The values match types.Effect, so the two convert directly.
 const (
-	EffectPermit Effect = true
-	EffectForbid Effect = false
+	EffectForbid Effect = iota
+	EffectPermit
+	EffectConditional
 )
 
 // Position is a value that represents a source Position.
@@ -62,6 +64,10 @@ func Permit() *Policy {
 
 func Forbid() *Policy {
 	return newPolicy(EffectForbid, nil)
+}
+
+func Conditional() *Policy {
+	return newPolicy(EffectConditional, nil)
 }
 
 func (p *Policy) When(node Node) *Policy {

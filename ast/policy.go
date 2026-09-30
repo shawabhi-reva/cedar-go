@@ -3,6 +3,7 @@
 // Programmatically generated policies are germinated by calling one of the following top-level functions:
 //   - [Permit]
 //   - [Forbid]
+//   - [Conditional]
 //   - [Annotation]
 package ast
 
@@ -33,6 +34,11 @@ func Permit() *Policy {
 // Forbid creates a new Forbid policy.
 func Forbid() *Policy {
 	return wrapPolicy(ast.Forbid())
+}
+
+// Conditional creates a new Conditional policy.
+func Conditional() *Policy {
+	return wrapPolicy(ast.Conditional())
 }
 
 // When adds a conditional clause.

@@ -64,7 +64,8 @@ func PartialPolicy(env Env, p *ast.Policy) (policy *ast.Policy, keep bool) {
 			p2.Conditions = append(p2.Conditions, c)
 			continue
 		} else if errors.Is(err, errIgnore) {
-			if types.Effect(p.Effect) == types.Permit {
+			// Permit and Conditional drop the condition; only Forbid is dropped entirely.
+			if types.Effect(p.Effect) != types.Forbid {
 				continue
 			}
 			return nil, false

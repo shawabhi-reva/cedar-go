@@ -31,7 +31,7 @@ func TestIsAuthorized(t *testing.T) {
 			Action:    dropTable,
 			Resource:  cedar.NewEntityUID("table", "whatever"),
 			Context:   cedar.Record{},
-			Want:      true,
+			Want:      cedar.Allow,
 			DiagErr:   0,
 		},
 		{
@@ -48,7 +48,7 @@ func TestIsAuthorized(t *testing.T) {
 			Action:    dropTable,
 			Resource:  cedar.NewEntityUID("table", "whatever"),
 			Context:   cedar.Record{},
-			Want:      true,
+			Want:      cedar.Allow,
 			DiagErr:   0,
 		},
 		{
@@ -59,7 +59,7 @@ func TestIsAuthorized(t *testing.T) {
 			Action:    dropTable,
 			Resource:  cedar.NewEntityUID("table", "whatever"),
 			Context:   cedar.Record{},
-			Want:      true,
+			Want:      cedar.Allow,
 			DiagErr:   0,
 		},
 		{
@@ -70,7 +70,7 @@ func TestIsAuthorized(t *testing.T) {
 			Action:    dropTable,
 			Resource:  cedar.NewEntityUID("table", "whatever"),
 			Context:   cedar.Record{},
-			Want:      false,
+			Want:      cedar.Deny,
 			DiagErr:   0,
 		},
 		{
@@ -81,7 +81,7 @@ func TestIsAuthorized(t *testing.T) {
 			Action:    dropTable,
 			Resource:  cedar.NewEntityUID("table", "whatever"),
 			Context:   cedar.Record{},
-			Want:      false,
+			Want:      cedar.Deny,
 			DiagErr:   0,
 		},
 		{
@@ -92,7 +92,7 @@ func TestIsAuthorized(t *testing.T) {
 			Action:    dropTable,
 			Resource:  cedar.NewEntityUID("table", "whatever"),
 			Context:   cedar.Record{},
-			Want:      false,
+			Want:      cedar.Deny,
 			DiagErr:   1,
 		},
 		{
@@ -105,7 +105,7 @@ func TestIsAuthorized(t *testing.T) {
 			Action:    dropTable,
 			Resource:  cedar.NewEntityUID("table", "whatever"),
 			Context:   cedar.Record{},
-			Want:      true,
+			Want:      cedar.Allow,
 			DiagErr:   1,
 		},
 		{
@@ -116,7 +116,7 @@ func TestIsAuthorized(t *testing.T) {
 			Action:    dropTable,
 			Resource:  cedar.NewEntityUID("table", "whatever"),
 			Context:   cedar.NewRecord(cedar.RecordMap{"x": cedar.Long(42)}),
-			Want:      true,
+			Want:      cedar.Allow,
 			DiagErr:   0,
 		},
 		{
@@ -127,7 +127,7 @@ func TestIsAuthorized(t *testing.T) {
 			Action:    dropTable,
 			Resource:  cedar.NewEntityUID("table", "whatever"),
 			Context:   cedar.NewRecord(cedar.RecordMap{"x": cedar.Long(43)}),
-			Want:      false,
+			Want:      cedar.Deny,
 			DiagErr:   0,
 		},
 		{
@@ -143,7 +143,7 @@ func TestIsAuthorized(t *testing.T) {
 			Action:    dropTable,
 			Resource:  cedar.NewEntityUID("table", "whatever"),
 			Context:   cedar.Record{},
-			Want:      true,
+			Want:      cedar.Allow,
 			DiagErr:   0,
 		},
 		{
@@ -159,7 +159,7 @@ func TestIsAuthorized(t *testing.T) {
 			Action:    dropTable,
 			Resource:  cedar.NewEntityUID("table", "whatever"),
 			Context:   cedar.Record{},
-			Want:      false,
+			Want:      cedar.Deny,
 			DiagErr:   0,
 		},
 		{
@@ -175,7 +175,7 @@ func TestIsAuthorized(t *testing.T) {
 			Action:    dropTable,
 			Resource:  cedar.NewEntityUID("table", "whatever"),
 			Context:   cedar.Record{},
-			Want:      true,
+			Want:      cedar.Allow,
 			DiagErr:   0,
 		},
 		{
@@ -186,7 +186,7 @@ func TestIsAuthorized(t *testing.T) {
 			Action:    dropTable,
 			Resource:  cedar.NewEntityUID("table", "whatever"),
 			Context:   cedar.Record{},
-			Want:      true,
+			Want:      cedar.Allow,
 			DiagErr:   0,
 		},
 		{
@@ -202,7 +202,7 @@ func TestIsAuthorized(t *testing.T) {
 			Action:    dropTable,
 			Resource:  cedar.NewEntityUID("table", "whatever"),
 			Context:   cedar.Record{},
-			Want:      true,
+			Want:      cedar.Allow,
 			DiagErr:   0,
 		},
 		{
@@ -213,7 +213,7 @@ func TestIsAuthorized(t *testing.T) {
 			Action:    dropTable,
 			Resource:  cedar.NewEntityUID("table", "whatever"),
 			Context:   cedar.Record{},
-			Want:      true,
+			Want:      cedar.Allow,
 			DiagErr:   0,
 		},
 		{
@@ -229,7 +229,7 @@ func TestIsAuthorized(t *testing.T) {
 			Action:    dropTable,
 			Resource:  cedar.NewEntityUID("table", "whatever"),
 			Context:   cedar.Record{},
-			Want:      true,
+			Want:      cedar.Allow,
 			DiagErr:   0,
 		},
 		{
@@ -245,7 +245,7 @@ func TestIsAuthorized(t *testing.T) {
 			Action:    dropTable,
 			Resource:  cedar.NewEntityUID("table", "whatever"),
 			Context:   cedar.Record{},
-			Want:      true,
+			Want:      cedar.Allow,
 			DiagErr:   0,
 		},
 		{
@@ -256,7 +256,7 @@ func TestIsAuthorized(t *testing.T) {
 			Action:    dropTable,
 			Resource:  cedar.NewEntityUID("table", "whatever"),
 			Context:   cedar.Record{},
-			Want:      true,
+			Want:      cedar.Allow,
 			DiagErr:   0,
 		},
 		{
@@ -267,7 +267,7 @@ func TestIsAuthorized(t *testing.T) {
 			Action:    dropTable,
 			Resource:  cedar.NewEntityUID("table", "whatever"),
 			Context:   cedar.Record{},
-			Want:      true,
+			Want:      cedar.Allow,
 			DiagErr:   0,
 		},
 		{
@@ -278,7 +278,7 @@ func TestIsAuthorized(t *testing.T) {
 			Action:    dropTable,
 			Resource:  cedar.NewEntityUID("table", "whatever"),
 			Context:   cedar.Record{},
-			Want:      true,
+			Want:      cedar.Allow,
 			DiagErr:   0,
 		},
 		{
@@ -289,7 +289,7 @@ func TestIsAuthorized(t *testing.T) {
 			Action:    dropTable,
 			Resource:  cedar.NewEntityUID("table", "whatever"),
 			Context:   cedar.Record{},
-			Want:      true,
+			Want:      cedar.Allow,
 			DiagErr:   0,
 		},
 		{
@@ -300,7 +300,7 @@ func TestIsAuthorized(t *testing.T) {
 			Action:    dropTable,
 			Resource:  cedar.NewEntityUID("table", "whatever"),
 			Context:   cedar.Record{},
-			Want:      true,
+			Want:      cedar.Allow,
 			DiagErr:   0,
 		},
 		{
@@ -311,7 +311,7 @@ func TestIsAuthorized(t *testing.T) {
 			Action:    dropTable,
 			Resource:  cedar.NewEntityUID("table", "whatever"),
 			Context:   cedar.Record{},
-			Want:      true,
+			Want:      cedar.Allow,
 			DiagErr:   0,
 		},
 		{
@@ -322,7 +322,7 @@ func TestIsAuthorized(t *testing.T) {
 			Action:    dropTable,
 			Resource:  cedar.NewEntityUID("table", "whatever"),
 			Context:   cedar.Record{},
-			Want:      true,
+			Want:      cedar.Allow,
 			DiagErr:   0,
 		},
 		{
@@ -338,7 +338,7 @@ func TestIsAuthorized(t *testing.T) {
 			Action:    dropTable,
 			Resource:  cedar.NewEntityUID("table", "whatever"),
 			Context:   cedar.Record{},
-			Want:      true,
+			Want:      cedar.Allow,
 			DiagErr:   0,
 		},
 		{
@@ -349,7 +349,7 @@ func TestIsAuthorized(t *testing.T) {
 			Action:    dropTable,
 			Resource:  cedar.NewEntityUID("table", "whatever"),
 			Context:   cedar.Record{},
-			Want:      true,
+			Want:      cedar.Allow,
 			DiagErr:   0,
 		},
 		{
@@ -360,7 +360,7 @@ func TestIsAuthorized(t *testing.T) {
 			Action:    dropTable,
 			Resource:  cedar.NewEntityUID("table", "whatever"),
 			Context:   cedar.Record{},
-			Want:      true,
+			Want:      cedar.Allow,
 			DiagErr:   0,
 		},
 		{
@@ -371,7 +371,7 @@ func TestIsAuthorized(t *testing.T) {
 			Action:    dropTable,
 			Resource:  cedar.NewEntityUID("table", "whatever"),
 			Context:   cedar.Record{},
-			Want:      true,
+			Want:      cedar.Allow,
 			DiagErr:   0,
 		},
 		{
@@ -382,7 +382,7 @@ func TestIsAuthorized(t *testing.T) {
 			Action:    dropTable,
 			Resource:  cedar.NewEntityUID("table", "whatever"),
 			Context:   cedar.Record{},
-			Want:      true,
+			Want:      cedar.Allow,
 			DiagErr:   0,
 		},
 		{
@@ -393,7 +393,7 @@ func TestIsAuthorized(t *testing.T) {
 			Action:    dropTable,
 			Resource:  cedar.NewEntityUID("table", "whatever"),
 			Context:   cedar.Record{},
-			Want:      true,
+			Want:      cedar.Allow,
 			DiagErr:   0,
 		},
 		{
@@ -404,7 +404,7 @@ func TestIsAuthorized(t *testing.T) {
 			Action:    dropTable,
 			Resource:  cedar.NewEntityUID("table", "whatever"),
 			Context:   cedar.Record{},
-			Want:      true,
+			Want:      cedar.Allow,
 			DiagErr:   0,
 		},
 		{
@@ -415,7 +415,7 @@ func TestIsAuthorized(t *testing.T) {
 			Action:    dropTable,
 			Resource:  cedar.NewEntityUID("table", "whatever"),
 			Context:   cedar.Record{},
-			Want:      true,
+			Want:      cedar.Allow,
 			DiagErr:   0,
 		},
 		{
@@ -426,7 +426,7 @@ func TestIsAuthorized(t *testing.T) {
 			Action:    dropTable,
 			Resource:  cedar.NewEntityUID("table", "whatever"),
 			Context:   cedar.Record{},
-			Want:      true,
+			Want:      cedar.Allow,
 			DiagErr:   0,
 		},
 		{
@@ -437,7 +437,7 @@ func TestIsAuthorized(t *testing.T) {
 			Action:    dropTable,
 			Resource:  cedar.NewEntityUID("table", "whatever"),
 			Context:   cedar.Record{},
-			Want:      false,
+			Want:      cedar.Deny,
 			DiagErr:   0,
 			ParseErr:  true,
 		},
@@ -449,7 +449,7 @@ func TestIsAuthorized(t *testing.T) {
 			Action:    dropTable,
 			Resource:  cedar.NewEntityUID("table", "whatever"),
 			Context:   cedar.Record{},
-			Want:      true,
+			Want:      cedar.Allow,
 			DiagErr:   0,
 		},
 		{
@@ -460,7 +460,7 @@ func TestIsAuthorized(t *testing.T) {
 			Action:    dropTable,
 			Resource:  cedar.NewEntityUID("table", "whatever"),
 			Context:   cedar.Record{},
-			Want:      false,
+			Want:      cedar.Deny,
 			DiagErr:   0,
 			ParseErr:  true,
 		},
@@ -472,7 +472,7 @@ func TestIsAuthorized(t *testing.T) {
 			Action:    dropTable,
 			Resource:  cedar.NewEntityUID("table", "whatever"),
 			Context:   cedar.Record{},
-			Want:      true,
+			Want:      cedar.Allow,
 			DiagErr:   0,
 		},
 		{
@@ -483,7 +483,7 @@ func TestIsAuthorized(t *testing.T) {
 			Action:    dropTable,
 			Resource:  cedar.NewEntityUID("table", "whatever"),
 			Context:   cedar.Record{},
-			Want:      false,
+			Want:      cedar.Deny,
 			DiagErr:   0,
 			ParseErr:  true,
 		},
@@ -495,7 +495,7 @@ func TestIsAuthorized(t *testing.T) {
 			Action:    dropTable,
 			Resource:  cedar.NewEntityUID("table", "whatever"),
 			Context:   cedar.Record{},
-			Want:      true,
+			Want:      cedar.Allow,
 			DiagErr:   0,
 		},
 		{
@@ -506,7 +506,7 @@ func TestIsAuthorized(t *testing.T) {
 			Action:    dropTable,
 			Resource:  cedar.NewEntityUID("table", "whatever"),
 			Context:   cedar.Record{},
-			Want:      false,
+			Want:      cedar.Deny,
 			DiagErr:   0,
 			ParseErr:  true,
 		},
@@ -518,7 +518,7 @@ func TestIsAuthorized(t *testing.T) {
 			Action:    dropTable,
 			Resource:  cedar.NewEntityUID("table", "whatever"),
 			Context:   cedar.Record{},
-			Want:      true,
+			Want:      cedar.Allow,
 			DiagErr:   0,
 		},
 		{
@@ -529,7 +529,7 @@ func TestIsAuthorized(t *testing.T) {
 			Action:    dropTable,
 			Resource:  cedar.NewEntityUID("table", "whatever"),
 			Context:   cedar.Record{},
-			Want:      false,
+			Want:      cedar.Deny,
 			DiagErr:   0,
 			ParseErr:  true,
 		},
@@ -545,7 +545,7 @@ func TestIsAuthorized(t *testing.T) {
 			Action:    dropTable,
 			Resource:  cedar.NewEntityUID("table", "whatever"),
 			Context:   cedar.Record{},
-			Want:      true,
+			Want:      cedar.Allow,
 			DiagErr:   0,
 		},
 		{
@@ -556,7 +556,7 @@ func TestIsAuthorized(t *testing.T) {
 			Action:    dropTable,
 			Resource:  cedar.NewEntityUID("table", "whatever"),
 			Context:   cedar.Record{},
-			Want:      false,
+			Want:      cedar.Deny,
 			DiagErr:   1,
 		},
 		{
@@ -572,7 +572,7 @@ func TestIsAuthorized(t *testing.T) {
 			Action:    dropTable,
 			Resource:  cedar.NewEntityUID("table", "whatever"),
 			Context:   cedar.Record{},
-			Want:      true,
+			Want:      cedar.Allow,
 			DiagErr:   0,
 		},
 		{
@@ -583,7 +583,7 @@ func TestIsAuthorized(t *testing.T) {
 			Action:    dropTable,
 			Resource:  cedar.NewEntityUID("table", "whatever"),
 			Context:   cedar.Record{},
-			Want:      false,
+			Want:      cedar.Deny,
 			DiagErr:   1,
 		},
 		{
@@ -607,7 +607,7 @@ func TestIsAuthorized(t *testing.T) {
 			Action:    dropTable,
 			Resource:  cedar.NewEntityUID("table", "whatever"),
 			Context:   cedar.Record{},
-			Want:      true,
+			Want:      cedar.Allow,
 			DiagErr:   0,
 		},
 		{
@@ -618,7 +618,7 @@ func TestIsAuthorized(t *testing.T) {
 			Action:    dropTable,
 			Resource:  cedar.NewEntityUID("table", "whatever"),
 			Context:   cedar.Record{},
-			Want:      false,
+			Want:      cedar.Deny,
 			DiagErr:   1,
 		},
 		{
@@ -634,7 +634,7 @@ func TestIsAuthorized(t *testing.T) {
 			Action:    dropTable,
 			Resource:  cedar.NewEntityUID("table", "whatever"),
 			Context:   cedar.Record{},
-			Want:      true,
+			Want:      cedar.Allow,
 			DiagErr:   0,
 		},
 		{
@@ -645,7 +645,7 @@ func TestIsAuthorized(t *testing.T) {
 			Action:    dropTable,
 			Resource:  cedar.NewEntityUID("table", "whatever"),
 			Context:   cedar.Record{},
-			Want:      false,
+			Want:      cedar.Deny,
 			DiagErr:   1,
 		},
 		{
@@ -656,7 +656,7 @@ func TestIsAuthorized(t *testing.T) {
 			Action:    dropTable,
 			Resource:  cedar.NewEntityUID("table", "whatever"),
 			Context:   cedar.Record{},
-			Want:      false,
+			Want:      cedar.Deny,
 			DiagErr:   1,
 		},
 		{
@@ -667,7 +667,7 @@ func TestIsAuthorized(t *testing.T) {
 			Action:    dropTable,
 			Resource:  cedar.NewEntityUID("table", "whatever"),
 			Context:   cedar.Record{},
-			Want:      false,
+			Want:      cedar.Deny,
 			DiagErr:   1,
 		},
 		{
@@ -678,7 +678,7 @@ func TestIsAuthorized(t *testing.T) {
 			Action:    dropTable,
 			Resource:  cedar.NewEntityUID("table", "whatever"),
 			Context:   cedar.Record{},
-			Want:      false,
+			Want:      cedar.Deny,
 			DiagErr:   1,
 		},
 		{
@@ -689,7 +689,7 @@ func TestIsAuthorized(t *testing.T) {
 			Action:    dropTable,
 			Resource:  cedar.NewEntityUID("table", "whatever"),
 			Context:   cedar.Record{},
-			Want:      false,
+			Want:      cedar.Deny,
 			DiagErr:   1,
 		},
 		{
@@ -700,7 +700,7 @@ func TestIsAuthorized(t *testing.T) {
 			Action:    dropTable,
 			Resource:  cedar.NewEntityUID("table", "whatever"),
 			Context:   cedar.Record{},
-			Want:      false,
+			Want:      cedar.Deny,
 			DiagErr:   1,
 		},
 		{
@@ -708,7 +708,7 @@ func TestIsAuthorized(t *testing.T) {
 			Policy:   `permit(principal,action,resource) when { -context.value > 0 };`,
 			Entities: cedar.EntityMap{},
 			Context:  cedar.NewRecord(cedar.RecordMap{"value": cedar.Long(-42)}),
-			Want:     true,
+			Want:     cedar.Allow,
 			DiagErr:  0,
 		},
 		{
@@ -719,7 +719,7 @@ func TestIsAuthorized(t *testing.T) {
 			Action:    cedar.NewEntityUID("Action", "drop"),
 			Resource:  cedar.NewEntityUID("Resource", "table"),
 			Context:   cedar.Record{},
-			Want:      true,
+			Want:      cedar.Allow,
 			DiagErr:   0,
 		},
 		{
@@ -730,7 +730,7 @@ func TestIsAuthorized(t *testing.T) {
 			Action:    cedar.NewEntityUID("Action", "drop"),
 			Resource:  cedar.NewEntityUID("Resource", "table"),
 			Context:   cedar.Record{},
-			Want:      true,
+			Want:      cedar.Allow,
 			DiagErr:   0,
 		},
 		{
@@ -741,7 +741,7 @@ func TestIsAuthorized(t *testing.T) {
 			Action:    cedar.NewEntityUID("Action", "drop"),
 			Resource:  cedar.NewEntityUID("Resource", "table"),
 			Context:   cedar.Record{},
-			Want:      true,
+			Want:      cedar.Allow,
 			DiagErr:   0,
 		},
 		{
@@ -752,7 +752,7 @@ func TestIsAuthorized(t *testing.T) {
 			Action:    cedar.NewEntityUID("Action", "drop"),
 			Resource:  cedar.NewEntityUID("Resource", "table"),
 			Context:   cedar.Record{},
-			Want:      true,
+			Want:      cedar.Allow,
 			DiagErr:   0,
 		},
 		{
@@ -763,7 +763,7 @@ func TestIsAuthorized(t *testing.T) {
 			Action:    cedar.NewEntityUID("Action", "drop"),
 			Resource:  cedar.NewEntityUID("Resource", "table"),
 			Context:   cedar.Record{},
-			Want:      true,
+			Want:      cedar.Allow,
 			DiagErr:   0,
 		},
 		{
@@ -774,7 +774,7 @@ func TestIsAuthorized(t *testing.T) {
 			Action:    cedar.NewEntityUID("Action", "drop"),
 			Resource:  cedar.NewEntityUID("Resource", "table"),
 			Context:   cedar.Record{},
-			Want:      true,
+			Want:      cedar.Allow,
 			DiagErr:   0,
 		},
 		{
@@ -790,7 +790,7 @@ func TestIsAuthorized(t *testing.T) {
 			Action:    cedar.NewEntityUID("Action", "drop"),
 			Resource:  cedar.NewEntityUID("Resource", "table"),
 			Context:   cedar.Record{},
-			Want:      true,
+			Want:      cedar.Allow,
 			DiagErr:   0,
 		},
 		{
@@ -806,7 +806,7 @@ func TestIsAuthorized(t *testing.T) {
 			Action:    cedar.NewEntityUID("Action", "action"),
 			Resource:  cedar.NewEntityUID("Resource", "resource"),
 			Context:   cedar.NewRecord(cedar.RecordMap{"foo": cedar.Long(43)}),
-			Want:      true,
+			Want:      cedar.Allow,
 			DiagErr:   0,
 		},
 		{
@@ -817,7 +817,7 @@ func TestIsAuthorized(t *testing.T) {
 			Action:    cedar.NewEntityUID("Action", "action"),
 			Resource:  cedar.NewEntityUID("Resource", "resource"),
 			Context:   cedar.NewRecord(cedar.RecordMap{"foo": cedar.NewSet(), "bar": cedar.NewSet(types.Long(1))}),
-			Want:      true,
+			Want:      cedar.Allow,
 			DiagErr:   0,
 		},
 	}

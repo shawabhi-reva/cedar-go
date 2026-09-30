@@ -20,25 +20,40 @@ func (r Request) Equal(other Request) bool {
 }
 
 // A Decision is the result of the authorization.
-type Decision bool
+type Decision uint8
 
-// Each authorization results in one of these Decisions.
+// Each authorization results in one of these Decisions. The zero value is Deny.
 const (
-	Allow = Decision(true)
-	Deny  = Decision(false)
+	Deny Decision = iota
+	Allow
+	// ConditionalAllow means the request is allowed only once the caller fulfils the
+	// conditions attached (as annotations) to the satisfied conditional policies, which
+	// are reported as the reasons.
+	ConditionalAllow
 )
 
 func (a Decision) String() string {
-	if a {
+	switch a {
+	case Allow:
 		return "allow"
+	case ConditionalAllow:
+		return "conditionalAllow"
+	default:
+		return "deny"
 	}
-	return "deny"
 }
 
 func (a Decision) MarshalJSON() ([]byte, error) { return []byte(`"` + a.String() + `"`), nil }
 
 func (a *Decision) UnmarshalJSON(b []byte) error {
-	*a = string(b) == `"allow"`
+	switch string(b) {
+	case `"allow"`:
+		*a = Allow
+	case `"conditionalAllow"`:
+		*a = ConditionalAllow
+	default:
+		*a = Deny
+	}
 	return nil
 }
 
@@ -84,15 +99,30 @@ type Position struct {
 	Column int `json:"column"`
 }
 
-// An Effect specifies the intent of the policy, to either permit or forbid any
-// request that matches the scope and conditions specified in the policy.
-type Effect bool
+// An Effect specifies the intent of the policy, to permit, forbid or conditionally
+// permit any request that matches the scope and conditions specified in the policy.
+type Effect uint8
 
-// Each Policy has a Permit or Forbid effect that is determined during parsing.
+// Each Policy has a Permit, Forbid or Conditional effect that is determined during
+// parsing. The zero value is Forbid.
 const (
-	Permit = Effect(true)
-	Forbid = Effect(false)
+	Forbid Effect = iota
+	Permit
+	// Conditional policies allow a matching request only conditionally. They take
+	// precedence over Permit, and Forbid takes precedence over them.
+	Conditional
 )
+
+func (e Effect) String() string {
+	switch e {
+	case Permit:
+		return "permit"
+	case Conditional:
+		return "conditional"
+	default:
+		return "forbid"
+	}
+}
 
 // An Annotations is a map of key, value pairs found in the policy. Annotations
 // have no impact on policy evaluation.

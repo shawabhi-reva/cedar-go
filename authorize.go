@@ -29,12 +29,14 @@ func Authorize(policies PolicyIterator, entities types.EntityGetter, req Request
 	}
 	var diag Diagnostic
 	var forbids []DiagnosticReason
+	var conditionals []DiagnosticReason
 	var permits []DiagnosticReason
 	// Don't try to short circuit this.
 	// - Even though single forbid means forbid
 	// - All policy should be run to collect errors
 	// - For permit, all permits must be run to collect annotations
 	// - For forbid, forbids must be run to collect annotations
+	// - For conditional, conditionals must be run to collect annotations (obligations)
 	for id, po := range policies.All() {
 		result, err := po.eval.Eval(env)
 		if err != nil {
@@ -44,15 +46,24 @@ func Authorize(policies PolicyIterator, entities types.EntityGetter, req Request
 		if !result {
 			continue
 		}
-		if po.Effect() == Forbid {
-			forbids = append(forbids, DiagnosticReason{PolicyID: id, Position: po.Position()})
-		} else {
-			permits = append(permits, DiagnosticReason{PolicyID: id, Position: po.Position()})
+		reason := DiagnosticReason{PolicyID: id, Position: po.Position()}
+		switch po.Effect() {
+		case Forbid:
+			forbids = append(forbids, reason)
+		case Conditional:
+			conditionals = append(conditionals, reason)
+		default:
+			permits = append(permits, reason)
 		}
 	}
+	// Precedence: forbid > conditional > permit > default deny.
 	if len(forbids) > 0 {
 		diag.Reasons = forbids
 		return Deny, diag
+	}
+	if len(conditionals) > 0 {
+		diag.Reasons = conditionals
+		return ConditionalAllow, diag
 	}
 	if len(permits) > 0 {
 		diag.Reasons = permits

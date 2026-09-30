@@ -40,6 +40,10 @@ func (a *Annotations) Forbid() *Policy {
 	return newPolicy(EffectForbid, a.nodes)
 }
 
+func (a *Annotations) Conditional() *Policy {
+	return newPolicy(EffectConditional, a.nodes)
+}
+
 func (p *Policy) Annotate(key types.Ident, value types.String) *Policy {
 	p.Annotations = addAnnotation(p.Annotations, key, value)
 	return p

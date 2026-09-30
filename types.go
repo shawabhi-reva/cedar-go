@@ -53,15 +53,17 @@ type DiagnosticReason = types.DiagnosticReason
 type DiagnosticError = types.DiagnosticError
 
 const (
-	Allow = types.Allow
-	Deny  = types.Deny
+	Allow            = types.Allow
+	Deny             = types.Deny
+	ConditionalAllow = types.ConditionalAllow
 )
 
 type Effect = types.Effect
 
 const (
-	Permit = types.Permit
-	Forbid = types.Forbid
+	Permit      = types.Permit
+	Forbid      = types.Forbid
+	Conditional = types.Conditional
 )
 
 type Annotations = types.Annotations

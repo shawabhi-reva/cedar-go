@@ -230,6 +230,8 @@ func (p *parser) effect(a *ast.Annotations) (*ast.Policy, error) {
 		return a.Permit(), nil
 	case "forbid":
 		return a.Forbid(), nil
+	case "conditional":
+		return a.Conditional(), nil
 	}
 
 	return nil, p.errorf("unexpected effect: %v", next.Text)
