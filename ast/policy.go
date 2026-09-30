@@ -22,6 +22,11 @@ func Forbid() *Policy {
 	return wrapPolicy(ast.Forbid())
 }
 
+// Conditional creates a new Conditional policy.
+func Conditional() *Policy {
+	return wrapPolicy(ast.Conditional())
+}
+
 // When adds a conditional clause.
 func (p *Policy) When(node Node) *Policy {
 	return wrapPolicy(p.unwrap().When(node.Node))

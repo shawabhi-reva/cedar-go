@@ -81,8 +81,9 @@ func (p *Policy) Annotations() Annotations {
 type Effect = types.Effect
 
 const (
-	Permit = types.Permit
-	Forbid = types.Forbid
+	Permit      = types.Permit
+	Forbid      = types.Forbid
+	Conditional = types.Conditional
 )
 
 // Effect retrieves the effect of this policy.

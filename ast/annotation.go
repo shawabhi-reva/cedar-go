@@ -41,6 +41,11 @@ func (a *Annotations) Forbid() *Policy {
 	return wrapPolicy(a.unwrap().Forbid())
 }
 
+// Conditional begins a conditional policy from the given annotations.
+func (a *Annotations) Conditional() *Policy {
+	return wrapPolicy(a.unwrap().Conditional())
+}
+
 // If a previous annotation exists with the same key, this builder will replace it.
 func (p *Policy) Annotate(key types.Ident, value types.String) *Policy {
 	return wrapPolicy(p.unwrap().Annotate(key, value))

@@ -276,12 +276,14 @@ func diagnosticAuthzWithCallback(be *batchEvaler) error {
 func isAuthorized(ps map[types.PolicyID]*idEvaler, env *eval.Env) (types.Decision, types.Diagnostic) {
 	var diag types.Diagnostic
 	var forbids []types.DiagnosticReason
+	var conditionals []types.DiagnosticReason
 	var permits []types.DiagnosticReason
 	// Don't try to short circuit this.
 	// - Even though single forbid means forbid
 	// - All policy should be run to collect errors
 	// - For permit, all permits must be run to collect annotations
 	// - For forbid, forbids must be run to collect annotations
+	// - For conditional, conditionals must be run to collect annotations (obligations)
 	for pid, po := range ps {
 		result, err := po.Evaler.Eval(env)
 		if err != nil {
@@ -291,15 +293,24 @@ func isAuthorized(ps map[types.PolicyID]*idEvaler, env *eval.Env) (types.Decisio
 		if !result {
 			continue
 		}
-		if po.Policy.Effect == ast.EffectPermit {
-			permits = append(permits, types.DiagnosticReason{PolicyID: pid, Position: types.Position(po.Policy.Position)})
-		} else {
-			forbids = append(forbids, types.DiagnosticReason{PolicyID: pid, Position: types.Position(po.Policy.Position)})
+		reason := types.DiagnosticReason{PolicyID: pid, Position: types.Position(po.Policy.Position)}
+		switch po.Policy.Effect {
+		case ast.EffectPermit:
+			permits = append(permits, reason)
+		case ast.EffectConditional:
+			conditionals = append(conditionals, reason)
+		default:
+			forbids = append(forbids, reason)
 		}
 	}
+	// Precedence: forbid > conditional > permit > default deny.
 	if len(forbids) > 0 {
 		diag.Reasons = forbids
 		return types.Deny, diag
+	}
+	if len(conditionals) > 0 {
+		diag.Reasons = conditionals
+		return types.ConditionalAllow, diag
 	}
 	if len(permits) > 0 {
 		diag.Reasons = permits

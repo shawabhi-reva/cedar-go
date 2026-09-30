@@ -12,8 +12,9 @@ type DiagnosticReason = types.DiagnosticReason
 type DiagnosticError = types.DiagnosticError
 
 const (
-	Allow = types.Allow
-	Deny  = types.Deny
+	Allow            = types.Allow
+	Deny             = types.Deny
+	ConditionalAllow = types.ConditionalAllow
 )
 
 // IsAuthorized uses the combination of the PolicySet and Entities to determine
@@ -28,12 +29,14 @@ func (p PolicySet) IsAuthorized(entityMap types.Entities, req Request) (Decision
 	})
 	var diag Diagnostic
 	var forbids []DiagnosticReason
+	var conditionals []DiagnosticReason
 	var permits []DiagnosticReason
 	// Don't try to short circuit this.
 	// - Even though single forbid means forbid
 	// - All policy should be run to collect errors
 	// - For permit, all permits must be run to collect annotations
 	// - For forbid, forbids must be run to collect annotations
+	// - For conditional, conditionals must be run to collect annotations (obligations)
 	for id, po := range p.policies {
 		result, err := po.eval.Eval(c)
 		if err != nil {
@@ -43,15 +46,24 @@ func (p PolicySet) IsAuthorized(entityMap types.Entities, req Request) (Decision
 		if !result {
 			continue
 		}
-		if po.Effect() == Forbid {
-			forbids = append(forbids, DiagnosticReason{PolicyID: id, Position: po.Position()})
-		} else {
-			permits = append(permits, DiagnosticReason{PolicyID: id, Position: po.Position()})
+		reason := DiagnosticReason{PolicyID: id, Position: po.Position()}
+		switch po.Effect() {
+		case Forbid:
+			forbids = append(forbids, reason)
+		case Conditional:
+			conditionals = append(conditionals, reason)
+		default:
+			permits = append(permits, reason)
 		}
 	}
+	// Precedence: forbid > conditional > permit > default deny.
 	if len(forbids) > 0 {
 		diag.Reasons = forbids
 		return Deny, diag
+	}
+	if len(conditionals) > 0 {
+		diag.Reasons = conditionals
+		return ConditionalAllow, diag
 	}
 	if len(permits) > 0 {
 		diag.Reasons = permits

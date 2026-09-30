@@ -290,6 +290,8 @@ func (p *Policy) UnmarshalJSON(b []byte) error {
 		*(p.unwrap()) = *ast.Permit()
 	case "forbid":
 		*(p.unwrap()) = *ast.Forbid()
+	case "conditional":
+		*(p.unwrap()) = *ast.Conditional()
 	default:
 		return fmt.Errorf("unknown effect: %v", j.Effect)
 	}

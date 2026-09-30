@@ -30,7 +30,7 @@ func TestIsAuthorized(t *testing.T) {
 			Action:    dropTable,
 			Resource:  types.NewEntityUID("table", "whatever"),
 			Context:   types.Record{},
-			Want:      true,
+			Want:      Allow,
 			DiagErr:   0,
 		},
 		{
@@ -41,7 +41,7 @@ func TestIsAuthorized(t *testing.T) {
 			Action:    dropTable,
 			Resource:  types.NewEntityUID("table", "whatever"),
 			Context:   types.Record{},
-			Want:      false,
+			Want:      Deny,
 			DiagErr:   0,
 		},
 		{
@@ -52,7 +52,7 @@ func TestIsAuthorized(t *testing.T) {
 			Action:    dropTable,
 			Resource:  types.NewEntityUID("table", "whatever"),
 			Context:   types.Record{},
-			Want:      false,
+			Want:      Deny,
 			DiagErr:   0,
 		},
 		{
@@ -63,7 +63,7 @@ func TestIsAuthorized(t *testing.T) {
 			Action:    dropTable,
 			Resource:  types.NewEntityUID("table", "whatever"),
 			Context:   types.Record{},
-			Want:      false,
+			Want:      Deny,
 			DiagErr:   1,
 		},
 		{
@@ -76,7 +76,7 @@ func TestIsAuthorized(t *testing.T) {
 			Action:    dropTable,
 			Resource:  types.NewEntityUID("table", "whatever"),
 			Context:   types.Record{},
-			Want:      true,
+			Want:      Allow,
 			DiagErr:   1,
 		},
 		{
@@ -87,7 +87,7 @@ func TestIsAuthorized(t *testing.T) {
 			Action:    dropTable,
 			Resource:  types.NewEntityUID("table", "whatever"),
 			Context:   types.Record{"x": types.Long(42)},
-			Want:      true,
+			Want:      Allow,
 			DiagErr:   0,
 		},
 		{
@@ -98,7 +98,7 @@ func TestIsAuthorized(t *testing.T) {
 			Action:    dropTable,
 			Resource:  types.NewEntityUID("table", "whatever"),
 			Context:   types.Record{"x": types.Long(43)},
-			Want:      false,
+			Want:      Deny,
 			DiagErr:   0,
 		},
 		{
@@ -114,7 +114,7 @@ func TestIsAuthorized(t *testing.T) {
 			Action:    dropTable,
 			Resource:  types.NewEntityUID("table", "whatever"),
 			Context:   types.Record{},
-			Want:      true,
+			Want:      Allow,
 			DiagErr:   0,
 		},
 		{
@@ -130,7 +130,7 @@ func TestIsAuthorized(t *testing.T) {
 			Action:    dropTable,
 			Resource:  types.NewEntityUID("table", "whatever"),
 			Context:   types.Record{},
-			Want:      false,
+			Want:      Deny,
 			DiagErr:   0,
 		},
 		{
@@ -146,7 +146,7 @@ func TestIsAuthorized(t *testing.T) {
 			Action:    dropTable,
 			Resource:  types.NewEntityUID("table", "whatever"),
 			Context:   types.Record{},
-			Want:      true,
+			Want:      Allow,
 			DiagErr:   0,
 		},
 		{
@@ -157,7 +157,7 @@ func TestIsAuthorized(t *testing.T) {
 			Action:    dropTable,
 			Resource:  types.NewEntityUID("table", "whatever"),
 			Context:   types.Record{},
-			Want:      true,
+			Want:      Allow,
 			DiagErr:   0,
 		},
 		{
@@ -173,7 +173,7 @@ func TestIsAuthorized(t *testing.T) {
 			Action:    dropTable,
 			Resource:  types.NewEntityUID("table", "whatever"),
 			Context:   types.Record{},
-			Want:      true,
+			Want:      Allow,
 			DiagErr:   0,
 		},
 		{
@@ -184,7 +184,7 @@ func TestIsAuthorized(t *testing.T) {
 			Action:    dropTable,
 			Resource:  types.NewEntityUID("table", "whatever"),
 			Context:   types.Record{},
-			Want:      true,
+			Want:      Allow,
 			DiagErr:   0,
 		},
 		{
@@ -200,7 +200,7 @@ func TestIsAuthorized(t *testing.T) {
 			Action:    dropTable,
 			Resource:  types.NewEntityUID("table", "whatever"),
 			Context:   types.Record{},
-			Want:      true,
+			Want:      Allow,
 			DiagErr:   0,
 		},
 		{
@@ -216,7 +216,7 @@ func TestIsAuthorized(t *testing.T) {
 			Action:    dropTable,
 			Resource:  types.NewEntityUID("table", "whatever"),
 			Context:   types.Record{},
-			Want:      true,
+			Want:      Allow,
 			DiagErr:   0,
 		},
 		{
@@ -227,7 +227,7 @@ func TestIsAuthorized(t *testing.T) {
 			Action:    dropTable,
 			Resource:  types.NewEntityUID("table", "whatever"),
 			Context:   types.Record{},
-			Want:      true,
+			Want:      Allow,
 			DiagErr:   0,
 		},
 		{
@@ -238,7 +238,7 @@ func TestIsAuthorized(t *testing.T) {
 			Action:    dropTable,
 			Resource:  types.NewEntityUID("table", "whatever"),
 			Context:   types.Record{},
-			Want:      true,
+			Want:      Allow,
 			DiagErr:   0,
 		},
 		{
@@ -249,7 +249,7 @@ func TestIsAuthorized(t *testing.T) {
 			Action:    dropTable,
 			Resource:  types.NewEntityUID("table", "whatever"),
 			Context:   types.Record{},
-			Want:      true,
+			Want:      Allow,
 			DiagErr:   0,
 		},
 		{
@@ -260,7 +260,7 @@ func TestIsAuthorized(t *testing.T) {
 			Action:    dropTable,
 			Resource:  types.NewEntityUID("table", "whatever"),
 			Context:   types.Record{},
-			Want:      true,
+			Want:      Allow,
 			DiagErr:   0,
 		},
 		{
@@ -271,7 +271,7 @@ func TestIsAuthorized(t *testing.T) {
 			Action:    dropTable,
 			Resource:  types.NewEntityUID("table", "whatever"),
 			Context:   types.Record{},
-			Want:      true,
+			Want:      Allow,
 			DiagErr:   0,
 		},
 		{
@@ -282,7 +282,7 @@ func TestIsAuthorized(t *testing.T) {
 			Action:    dropTable,
 			Resource:  types.NewEntityUID("table", "whatever"),
 			Context:   types.Record{},
-			Want:      true,
+			Want:      Allow,
 			DiagErr:   0,
 		},
 		{
@@ -293,7 +293,7 @@ func TestIsAuthorized(t *testing.T) {
 			Action:    dropTable,
 			Resource:  types.NewEntityUID("table", "whatever"),
 			Context:   types.Record{},
-			Want:      true,
+			Want:      Allow,
 			DiagErr:   0,
 		},
 		{
@@ -309,7 +309,7 @@ func TestIsAuthorized(t *testing.T) {
 			Action:    dropTable,
 			Resource:  types.NewEntityUID("table", "whatever"),
 			Context:   types.Record{},
-			Want:      true,
+			Want:      Allow,
 			DiagErr:   0,
 		},
 		{
@@ -320,7 +320,7 @@ func TestIsAuthorized(t *testing.T) {
 			Action:    dropTable,
 			Resource:  types.NewEntityUID("table", "whatever"),
 			Context:   types.Record{},
-			Want:      true,
+			Want:      Allow,
 			DiagErr:   0,
 		},
 		{
@@ -331,7 +331,7 @@ func TestIsAuthorized(t *testing.T) {
 			Action:    dropTable,
 			Resource:  types.NewEntityUID("table", "whatever"),
 			Context:   types.Record{},
-			Want:      true,
+			Want:      Allow,
 			DiagErr:   0,
 		},
 		{
@@ -342,7 +342,7 @@ func TestIsAuthorized(t *testing.T) {
 			Action:    dropTable,
 			Resource:  types.NewEntityUID("table", "whatever"),
 			Context:   types.Record{},
-			Want:      true,
+			Want:      Allow,
 			DiagErr:   0,
 		},
 		{
@@ -353,7 +353,7 @@ func TestIsAuthorized(t *testing.T) {
 			Action:    dropTable,
 			Resource:  types.NewEntityUID("table", "whatever"),
 			Context:   types.Record{},
-			Want:      true,
+			Want:      Allow,
 			DiagErr:   0,
 		},
 		{
@@ -364,7 +364,7 @@ func TestIsAuthorized(t *testing.T) {
 			Action:    dropTable,
 			Resource:  types.NewEntityUID("table", "whatever"),
 			Context:   types.Record{},
-			Want:      true,
+			Want:      Allow,
 			DiagErr:   0,
 		},
 		{
@@ -375,7 +375,7 @@ func TestIsAuthorized(t *testing.T) {
 			Action:    dropTable,
 			Resource:  types.NewEntityUID("table", "whatever"),
 			Context:   types.Record{},
-			Want:      true,
+			Want:      Allow,
 			DiagErr:   0,
 		},
 		{
@@ -386,7 +386,7 @@ func TestIsAuthorized(t *testing.T) {
 			Action:    dropTable,
 			Resource:  types.NewEntityUID("table", "whatever"),
 			Context:   types.Record{},
-			Want:      true,
+			Want:      Allow,
 			DiagErr:   0,
 		},
 		{
@@ -397,7 +397,7 @@ func TestIsAuthorized(t *testing.T) {
 			Action:    dropTable,
 			Resource:  types.NewEntityUID("table", "whatever"),
 			Context:   types.Record{},
-			Want:      true,
+			Want:      Allow,
 			DiagErr:   0,
 		},
 		{
@@ -408,7 +408,7 @@ func TestIsAuthorized(t *testing.T) {
 			Action:    dropTable,
 			Resource:  types.NewEntityUID("table", "whatever"),
 			Context:   types.Record{},
-			Want:      false,
+			Want:      Deny,
 			DiagErr:   0,
 			ParseErr:  true,
 		},
@@ -420,7 +420,7 @@ func TestIsAuthorized(t *testing.T) {
 			Action:    dropTable,
 			Resource:  types.NewEntityUID("table", "whatever"),
 			Context:   types.Record{},
-			Want:      true,
+			Want:      Allow,
 			DiagErr:   0,
 		},
 		{
@@ -431,7 +431,7 @@ func TestIsAuthorized(t *testing.T) {
 			Action:    dropTable,
 			Resource:  types.NewEntityUID("table", "whatever"),
 			Context:   types.Record{},
-			Want:      false,
+			Want:      Deny,
 			DiagErr:   0,
 			ParseErr:  true,
 		},
@@ -443,7 +443,7 @@ func TestIsAuthorized(t *testing.T) {
 			Action:    dropTable,
 			Resource:  types.NewEntityUID("table", "whatever"),
 			Context:   types.Record{},
-			Want:      true,
+			Want:      Allow,
 			DiagErr:   0,
 		},
 		{
@@ -454,7 +454,7 @@ func TestIsAuthorized(t *testing.T) {
 			Action:    dropTable,
 			Resource:  types.NewEntityUID("table", "whatever"),
 			Context:   types.Record{},
-			Want:      false,
+			Want:      Deny,
 			DiagErr:   0,
 			ParseErr:  true,
 		},
@@ -466,7 +466,7 @@ func TestIsAuthorized(t *testing.T) {
 			Action:    dropTable,
 			Resource:  types.NewEntityUID("table", "whatever"),
 			Context:   types.Record{},
-			Want:      true,
+			Want:      Allow,
 			DiagErr:   0,
 		},
 		{
@@ -477,7 +477,7 @@ func TestIsAuthorized(t *testing.T) {
 			Action:    dropTable,
 			Resource:  types.NewEntityUID("table", "whatever"),
 			Context:   types.Record{},
-			Want:      false,
+			Want:      Deny,
 			DiagErr:   0,
 			ParseErr:  true,
 		},
@@ -489,7 +489,7 @@ func TestIsAuthorized(t *testing.T) {
 			Action:    dropTable,
 			Resource:  types.NewEntityUID("table", "whatever"),
 			Context:   types.Record{},
-			Want:      true,
+			Want:      Allow,
 			DiagErr:   0,
 		},
 		{
@@ -500,7 +500,7 @@ func TestIsAuthorized(t *testing.T) {
 			Action:    dropTable,
 			Resource:  types.NewEntityUID("table", "whatever"),
 			Context:   types.Record{},
-			Want:      false,
+			Want:      Deny,
 			DiagErr:   0,
 			ParseErr:  true,
 		},
@@ -516,7 +516,7 @@ func TestIsAuthorized(t *testing.T) {
 			Action:    dropTable,
 			Resource:  types.NewEntityUID("table", "whatever"),
 			Context:   types.Record{},
-			Want:      true,
+			Want:      Allow,
 			DiagErr:   0,
 		},
 		{
@@ -527,7 +527,7 @@ func TestIsAuthorized(t *testing.T) {
 			Action:    dropTable,
 			Resource:  types.NewEntityUID("table", "whatever"),
 			Context:   types.Record{},
-			Want:      false,
+			Want:      Deny,
 			DiagErr:   1,
 		},
 		{
@@ -543,7 +543,7 @@ func TestIsAuthorized(t *testing.T) {
 			Action:    dropTable,
 			Resource:  types.NewEntityUID("table", "whatever"),
 			Context:   types.Record{},
-			Want:      true,
+			Want:      Allow,
 			DiagErr:   0,
 		},
 		{
@@ -554,7 +554,7 @@ func TestIsAuthorized(t *testing.T) {
 			Action:    dropTable,
 			Resource:  types.NewEntityUID("table", "whatever"),
 			Context:   types.Record{},
-			Want:      false,
+			Want:      Deny,
 			DiagErr:   1,
 		},
 		{
@@ -578,7 +578,7 @@ func TestIsAuthorized(t *testing.T) {
 			Action:    dropTable,
 			Resource:  types.NewEntityUID("table", "whatever"),
 			Context:   types.Record{},
-			Want:      true,
+			Want:      Allow,
 			DiagErr:   0,
 		},
 		{
@@ -589,7 +589,7 @@ func TestIsAuthorized(t *testing.T) {
 			Action:    dropTable,
 			Resource:  types.NewEntityUID("table", "whatever"),
 			Context:   types.Record{},
-			Want:      false,
+			Want:      Deny,
 			DiagErr:   1,
 		},
 		{
@@ -605,7 +605,7 @@ func TestIsAuthorized(t *testing.T) {
 			Action:    dropTable,
 			Resource:  types.NewEntityUID("table", "whatever"),
 			Context:   types.Record{},
-			Want:      true,
+			Want:      Allow,
 			DiagErr:   0,
 		},
 		{
@@ -616,7 +616,7 @@ func TestIsAuthorized(t *testing.T) {
 			Action:    dropTable,
 			Resource:  types.NewEntityUID("table", "whatever"),
 			Context:   types.Record{},
-			Want:      false,
+			Want:      Deny,
 			DiagErr:   1,
 		},
 		{
@@ -627,7 +627,7 @@ func TestIsAuthorized(t *testing.T) {
 			Action:    dropTable,
 			Resource:  types.NewEntityUID("table", "whatever"),
 			Context:   types.Record{},
-			Want:      false,
+			Want:      Deny,
 			DiagErr:   1,
 		},
 		{
@@ -638,7 +638,7 @@ func TestIsAuthorized(t *testing.T) {
 			Action:    dropTable,
 			Resource:  types.NewEntityUID("table", "whatever"),
 			Context:   types.Record{},
-			Want:      false,
+			Want:      Deny,
 			DiagErr:   1,
 		},
 		{
@@ -649,7 +649,7 @@ func TestIsAuthorized(t *testing.T) {
 			Action:    dropTable,
 			Resource:  types.NewEntityUID("table", "whatever"),
 			Context:   types.Record{},
-			Want:      false,
+			Want:      Deny,
 			DiagErr:   1,
 		},
 		{
@@ -660,7 +660,7 @@ func TestIsAuthorized(t *testing.T) {
 			Action:    dropTable,
 			Resource:  types.NewEntityUID("table", "whatever"),
 			Context:   types.Record{},
-			Want:      false,
+			Want:      Deny,
 			DiagErr:   1,
 		},
 		{
@@ -671,7 +671,7 @@ func TestIsAuthorized(t *testing.T) {
 			Action:    dropTable,
 			Resource:  types.NewEntityUID("table", "whatever"),
 			Context:   types.Record{},
-			Want:      false,
+			Want:      Deny,
 			DiagErr:   1,
 		},
 		{
@@ -679,7 +679,7 @@ func TestIsAuthorized(t *testing.T) {
 			Policy:   `permit(principal,action,resource) when { -context.value > 0 };`,
 			Entities: types.Entities{},
 			Context:  types.Record{"value": types.Long(-42)},
-			Want:     true,
+			Want:     Allow,
 			DiagErr:  0,
 		},
 		{
@@ -690,7 +690,7 @@ func TestIsAuthorized(t *testing.T) {
 			Action:    types.NewEntityUID("Action", "drop"),
 			Resource:  types.NewEntityUID("Resource", "table"),
 			Context:   types.Record{},
-			Want:      true,
+			Want:      Allow,
 			DiagErr:   0,
 		},
 		{
@@ -701,7 +701,7 @@ func TestIsAuthorized(t *testing.T) {
 			Action:    types.NewEntityUID("Action", "drop"),
 			Resource:  types.NewEntityUID("Resource", "table"),
 			Context:   types.Record{},
-			Want:      true,
+			Want:      Allow,
 			DiagErr:   0,
 		},
 		{
@@ -712,7 +712,7 @@ func TestIsAuthorized(t *testing.T) {
 			Action:    types.NewEntityUID("Action", "drop"),
 			Resource:  types.NewEntityUID("Resource", "table"),
 			Context:   types.Record{},
-			Want:      true,
+			Want:      Allow,
 			DiagErr:   0,
 		},
 		{
@@ -723,7 +723,7 @@ func TestIsAuthorized(t *testing.T) {
 			Action:    types.NewEntityUID("Action", "drop"),
 			Resource:  types.NewEntityUID("Resource", "table"),
 			Context:   types.Record{},
-			Want:      true,
+			Want:      Allow,
 			DiagErr:   0,
 		},
 		{
@@ -734,7 +734,7 @@ func TestIsAuthorized(t *testing.T) {
 			Action:    types.NewEntityUID("Action", "drop"),
 			Resource:  types.NewEntityUID("Resource", "table"),
 			Context:   types.Record{},
-			Want:      true,
+			Want:      Allow,
 			DiagErr:   0,
 		},
 		{
@@ -745,7 +745,7 @@ func TestIsAuthorized(t *testing.T) {
 			Action:    types.NewEntityUID("Action", "drop"),
 			Resource:  types.NewEntityUID("Resource", "table"),
 			Context:   types.Record{},
-			Want:      true,
+			Want:      Allow,
 			DiagErr:   0,
 		},
 		{
@@ -761,7 +761,7 @@ func TestIsAuthorized(t *testing.T) {
 			Action:    types.NewEntityUID("Action", "drop"),
 			Resource:  types.NewEntityUID("Resource", "table"),
 			Context:   types.Record{},
-			Want:      true,
+			Want:      Allow,
 			DiagErr:   0,
 		},
 		{
@@ -777,7 +777,7 @@ func TestIsAuthorized(t *testing.T) {
 			Action:    types.NewEntityUID("Action", "action"),
 			Resource:  types.NewEntityUID("Resource", "resource"),
 			Context:   types.Record{"foo": types.Long(43)},
-			Want:      true,
+			Want:      Allow,
 			DiagErr:   0,
 		},
 	}

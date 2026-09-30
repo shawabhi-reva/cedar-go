@@ -92,9 +92,12 @@ func marshalAnnotation(n ast.AnnotationType, buf *bytes.Buffer) {
 }
 
 func marshalEffect(e ast.Effect, buf *bytes.Buffer) {
-	if e == ast.EffectPermit {
+	switch e {
+	case ast.EffectPermit:
 		buf.WriteString("permit")
-	} else {
+	case ast.EffectConditional:
+		buf.WriteString("conditional")
+	default:
 		buf.WriteString("forbid")
 	}
 }

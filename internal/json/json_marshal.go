@@ -294,10 +294,7 @@ func (p *Policy) unwrap() *ast.Policy {
 
 func (p *Policy) MarshalJSON() ([]byte, error) {
 	var j policyJSON
-	j.Effect = "forbid"
-	if p.Effect {
-		j.Effect = "permit"
-	}
+	j.Effect = types.Effect(p.Effect).String()
 	if len(p.Annotations) > 0 {
 		j.Annotations = map[string]string{}
 	}

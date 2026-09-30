@@ -174,10 +174,13 @@ func (p *parser) annotation(a *ast.Annotations, known map[string]struct{}) error
 
 func (p *parser) effect(a *ast.Annotations) (*ast.Policy, error) {
 	next := p.advance()
-	if next.Text == "permit" {
+	switch next.Text {
+	case "permit":
 		return a.Permit(), nil
-	} else if next.Text == "forbid" {
+	case "forbid":
 		return a.Forbid(), nil
+	case "conditional":
+		return a.Conditional(), nil
 	}
 
 	return nil, p.errorf("unexpected effect: %v", next.Text)
